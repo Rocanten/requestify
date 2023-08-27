@@ -4,7 +4,15 @@ import re, json
 from urllib.request import urlopen
 
 class RequestCommand(sublime_plugin.TextCommand):
+	def __init__(self, view):
+		self.test = 'not set'
+		super().__init__(view)
 	def run(self, edit):
+
+		print(self.test)
+
+		if self.test == 'not set':
+			self.test = 'is set'
 		view = sublime.active_window().active_view()
 		content = view.substr(sublime.Region(0, 1000))
 		regex = r'(?<=GET )(.*)(?=\n)'
