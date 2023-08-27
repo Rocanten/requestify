@@ -1,0 +1,3 @@
+[
+	{ "keys": ["super+alt+ctrl+m"], "command": "request"},
+]
