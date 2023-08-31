@@ -15,9 +15,11 @@ HTTP file is a text file that contains information about a collection of request
 	password: password-value
 	###
     Method Request-URI
+    headers
     Header-field: Header-value
 	###
     Method Request-URI
+    headers
     Header-field: Header-value
     ###
 
@@ -55,9 +57,9 @@ If string `form-data` is presented on first line of parameters, all below parame
 	key: value
 
 ### Specifying raw json body
-For providing json body, `json` keyword is used
+For providing json body, `json_body` keyword is used
 
-	json
+	json_body
 	key: value
 
 ### Basic authentication

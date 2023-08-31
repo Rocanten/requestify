@@ -3,6 +3,15 @@ import sublime_plugin
 import re, json
 from urllib.request import urlopen
 
+from .HTTPFileParser import *
+
+
+class ParseViewCommand(sublime_plugin.TextCommand):
+	def run(self, edit):
+		parser = HTTPFileParser()
+		view = sublime.active_window().active_view()
+		parser.parse_view(view)
+
 class RequestCommand(sublime_plugin.TextCommand):
 	def __init__(self, view):
 		self.test = 'not set'
