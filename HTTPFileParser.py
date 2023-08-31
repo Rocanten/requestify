@@ -42,16 +42,15 @@ class HTTPFileParser:
 		form_data_params = self.parse_request_params(request_string, 'form-data')
 		urlencoded_params = self.parse_request_params(request_string, 'x-www-form-urlencoded')
 		json = self.parse_request_json(request_string)
-		request = Request(
+		return Request(
 			method=method,
 			url=url,
 			headers=headers,
 			query_params=query_params,
 			form_data_params=form_data_params,
 			urlencoded_params=urlencoded_params,
-			json=json
-			)
-		return request
+			json=json,
+		)
 
 
 	def parse_request_method(self, request_string: str) -> str:
@@ -64,7 +63,7 @@ class HTTPFileParser:
 
 	def parse_request_params(self, request_string: str, type: str) -> List[RequestParameter]:
 		params_string = self.get_string_section(request_string, type)
-		if params_string == None:
+		if params_string is None:
 			return None
 		p_parameters = re.compile(r'(?<=:).+|.+(?=:)', re.I)
 		parameters: List[str] = p_parameters.findall(params_string)
@@ -78,14 +77,13 @@ class HTTPFileParser:
 
 	def parse_request_json(self, request_string: str) -> dict:
 		json_section_string = self.get_string_section(request_string, 'json_body')
-		if json_section_string == None:
+		if json_section_string is None:
 			return None
 		p = re.compile(r'{.*}', re.S | re.I)
 		json_string = p.search(json_section_string).group()
 		json_string = json_string.replace("\n", "")
 		json_string = json_string.encode('unicode_escape')
-		result = json.loads(json_string)
-		return result
+		return json.loads(json_string)
 
 	def parse_file_scope_basic_auth(self, file_scope_string: str) -> FileBasicAuth:
 		p_only_basic = re.compile(r'(?<=basic).*(?=basic)', re.S | re.I)
@@ -99,8 +97,7 @@ class HTTPFileParser:
 	def get_string_section(self, request_string: str, type: str) -> str:
 		p_section_string = re.compile(f'(?<={type})(.*(?=\njson_body)|.*(?=\nquery)|.*(?=\nform-data)|.*(?=\nx-www-form-urlencoded)|.*\n$|.*}}$)', re.S | re.I)
 		try:
-			section_string = p_section_string.search(request_string).group()
-			return section_string
+			return p_section_string.search(request_string).group()
 		except AttributeError as e:
 			print(f'Token with type {type} not found')
 			return None

@@ -25,8 +25,7 @@ class RequestCommand(sublime_plugin.TextCommand):
 		view = sublime.active_window().active_view()
 		content = view.substr(sublime.Region(0, 1000))
 		regex = r'(?<=GET )(.*)(?=\n)'
-		match = re.search(regex, content)
-		if match:
+		if match := re.search(regex, content):
 			url = match.group()
 			print(url)
 			response = self.execute_get_request(url)
@@ -35,5 +34,4 @@ class RequestCommand(sublime_plugin.TextCommand):
 	def execute_get_request(self, url):
 		with urlopen(url) as response:
 			body = response.read()
-		body_decoded = body.decode('utf-8')
-		return body_decoded
+		return body.decode('utf-8')
