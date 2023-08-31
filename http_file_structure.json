@@ -1,0 +1,39 @@
+{
+	"file_basic_auth": {
+		"username": "user",
+		"password": "password"
+	},
+	"requests": [
+		{
+			"method": "GET",
+			"url": "https://google.com",
+			"headers": [
+				{
+					"key": "key",
+					"value": "value"
+				}
+			],
+			"query_params": [
+				{
+					"key": "key",
+					"value": "value"
+				}
+			],
+			"form_data_params": [
+				{
+					"key": "key",
+					"value": "value"
+				}
+			],
+			"urlencoded_params": [
+				{
+					"key": "key",
+					"value": "value"
+				}
+			],
+			"json": {
+
+			}
+		}
+	]
+}

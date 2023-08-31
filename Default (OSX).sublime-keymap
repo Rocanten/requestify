@@ -1,3 +1,4 @@
 [
 	{ "keys": ["super+alt+ctrl+m"], "command": "request"},
+	{ "keys": ["ctrl+alt+super+p"], "command": "parse_view"}
 ]
