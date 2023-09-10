@@ -3,13 +3,29 @@ import sublime_plugin
 import re, json
 from urllib.request import urlopen
 
-class RequestCommand(sublime_plugin.TextCommand):
+from .HTTPFileParser import *
+
+
+class ParseViewCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
+		parser = HTTPFileParser()
+		view = sublime.active_window().active_view()
+		parser.parse_view(view)
+
+class RequestCommand(sublime_plugin.TextCommand):
+	def __init__(self, view):
+		self.test = 'not set'
+		super().__init__(view)
+	def run(self, edit):
+
+		print(self.test)
+
+		if self.test == 'not set':
+			self.test = 'is set'
 		view = sublime.active_window().active_view()
 		content = view.substr(sublime.Region(0, 1000))
 		regex = r'(?<=GET )(.*)(?=\n)'
-		match = re.search(regex, content)
-		if match:
+		if match := re.search(regex, content):
 			url = match.group()
 			print(url)
 			response = self.execute_get_request(url)
@@ -18,5 +34,4 @@ class RequestCommand(sublime_plugin.TextCommand):
 	def execute_get_request(self, url):
 		with urlopen(url) as response:
 			body = response.read()
-		body_decoded = body.decode('utf-8')
-		return body_decoded
+		return body.decode('utf-8')

@@ -1,3 +1,4 @@
 [
-  { "caption": "Request", "command": "request" } 
+  { "caption": "Request", "command": "request" },
+  { "caption": "ParseView", "command": "parse_view" }
 ]

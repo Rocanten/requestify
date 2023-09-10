@@ -1,0 +1,50 @@
+basic
+username: john
+password: 123456
+
+
+basic
+username: mike
+password: 234
+
+proxy
+ip: 192.0.0.1
+port: 8091
+###
+
+# Comment
+# Comment 2
+
+GET https://gorest.co.in/public/v2/users
+
+headers
+accept: application/json
+Content-Type: application/json
+Authorization: Bearer dfca4f92f8dd6033cf9601274a343fbfa660565d62ecc59d438ca12040e9dd5f
+
+query
+count: 10
+offset: 1
+
+###
+
+POST https://gorest.co.in/public/v2/users
+
+headers
+accept: application/json
+Content-Type: application/json
+Authorization: Bearer dfca4f92f8dd6033cf9601274a343fbfa660565d62ecc59d438ca12040e9dd5f
+
+json_body
+{
+    "name": "Tenali Ramakrishna",
+    "gender": "male",
+    "email": "tenali.ramakrishnasss@15ce.com",
+    "status": "active",
+    "address": {
+        "city": "Toronto",
+        "street": "Street"
+    }
+}
+
+###
